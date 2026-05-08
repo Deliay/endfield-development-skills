@@ -12,6 +12,7 @@ This skill provides access to game data structures and assets from 'Arknights: E
 Use this skill when you need to:
 - Research game data structures and configuration
 - Retrieve specific data values from game tables
+- Search for localized text content in game data tables
 - Search for game assets (textures, images, sprites)
 - Download game resources for analysis or development
 
@@ -52,6 +53,22 @@ Retrieve all key-value pairs from a table.
 - **Endpoint:** `https://endfield-assets.fffdan.com/table/{TableName}/all`
 - **Returns:** `{ [key: string]: any }` - Complete table data
 - **Warning:** This endpoint returns large amounts of data and may exceed context limits. Use with caution.
+
+## I18n Search
+
+Search for localized text content in game data tables using regular expressions.
+
+### Search I18n Text
+
+Search for localized text content across game data tables using regex patterns.
+
+- **Endpoint:** `https://endfield-assets.fffdan.com/i18n/search/{table}/{regex}`
+- **Returns:** Array of matching text entries with their locations
+- **Parameters:**
+  - `{table}` - Table name to search in (same as `/vfs/Table/` table names) or `all` to search across all tables
+  - `{regex}` - Regular expression pattern to match against text content
+- **Example:** `https://endfield-assets.fffdan.com/i18n/search/CharacterTable/治疗.*范围` searches for text containing "治疗" followed by "范围" in CharacterTable
+- **Example:** `https://endfield-assets.fffdan.com/i18n/search/all/攻击.*提升` searches for text containing "攻击" followed by "提升" across all tables
 
 ## Game Assets
 
@@ -113,6 +130,18 @@ GET https://endfield-assets.fffdan.com/vfs/Bundle/file/assets/beyond/initialasse
 ```
 Downloads the specified texture file
 
+### Example 6: Search for localized text in a specific table
+```
+GET https://endfield-assets.fffdan.com/i18n/search/CharacterTable/治疗.*范围
+```
+Searches for text containing "治疗" followed by "范围" in CharacterTable
+
+### Example 7: Search for localized text across all tables
+```
+GET https://endfield-assets.fffdan.com/i18n/search/all/攻击.*提升
+```
+Searches for text containing "攻击" followed by "提升" across all available tables
+
 ## Best Practices
 
 1. **Start with table discovery** - Use `/vfs/Table/` to see what data is available
@@ -120,6 +149,7 @@ Downloads the specified texture file
 3. **Handle large data carefully** - The `/table/{TableName}/all` endpoint returns massive amounts of data
 4. **Check file formats** - Only `.png` and `.tga` files are downloadable
 5. **Respect rate limits** - Avoid making too many requests in quick succession
+6. **Use regex wisely** - When using `/i18n/search/`, craft precise regex patterns to avoid excessive results
 
 ## Common Issues
 
