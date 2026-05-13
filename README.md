@@ -66,6 +66,21 @@ After searching, you can download assets by constructing the full URL.
 - **Supported formats:** `.png`, `.tga`
 - Other file types will return `404` when downloaded
 
+### I18n / Localization
+
+Retrieve localized text by locale and ID.
+
+#### Get I18n Text
+
+Retrieve a specific localized text entry by locale and ID.
+
+- **Endpoint:** `https://endfield-assets.fffdan.com/i18n/{locale}/{id}`
+- **Returns:** `string` - The localized text string
+- **Parameters:**
+  - `{locale}` - Language code (`CN`, `EN`, or `JP`)
+  - `{id}` - Numeric ID (corresponds to the `id` field in `{ id: number, text: string }` data)
+- **Example:** `https://endfield-assets.fffdan.com/i18n/EN/1001` returns the English text with ID 1001
+
 ## Usage Examples
 
 ### Example 1: Get all available tables
@@ -97,6 +112,12 @@ Returns all PNG files in the UI sprites directory
 GET https://endfield-assets.fffdan.com/vfs/Bundle/file/assets/beyond/initialassets/ui/sprites/login/login_test_deco.png
 ```
 Downloads the specified texture file
+
+### Example 6: Get localized text by ID
+```
+GET https://endfield-assets.fffdan.com/i18n/EN/1001
+```
+Returns the English text string for ID 1001, e.g. `"Hello"`
 
 ## Best Practices
 

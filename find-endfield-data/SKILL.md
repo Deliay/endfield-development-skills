@@ -70,6 +70,17 @@ Search for localized text content across game data tables using regex patterns.
 - **Example:** `https://endfield-assets.fffdan.com/i18n/search/CharacterTable/治疗.*范围` searches for text containing "治疗" followed by "范围" in CharacterTable
 - **Example:** `https://endfield-assets.fffdan.com/i18n/search/all/攻击.*提升` searches for text containing "攻击" followed by "提升" across all tables
 
+### Get I18n Text
+
+Retrieve a specific localized text entry by locale and ID.
+
+- **Endpoint:** `https://endfield-assets.fffdan.com/i18n/{locale}/{id}`
+- **Returns:** `string` - The localized text string
+- **Parameters:**
+  - `{locale}` - Language code (`CN`, `EN`, or `JP`)
+  - `{id}` - Numeric ID (corresponds to the `id` field in `{ id: number, text: string }` data)
+- **Example:** `https://endfield-assets.fffdan.com/i18n/EN/1001` returns the English text with ID 1001
+
 ## Game Assets
 
 Search and download game textures, images, and other assets.
@@ -141,6 +152,12 @@ Searches for text containing "治疗" followed by "范围" in CharacterTable
 GET https://endfield-assets.fffdan.com/i18n/search/all/攻击.*提升
 ```
 Searches for text containing "攻击" followed by "提升" across all available tables
+
+### Example 8: Get localized text by ID
+```
+GET https://endfield-assets.fffdan.com/i18n/EN/1001
+```
+Returns the English text string for ID 1001, e.g. `"Hello"`
 
 ## Best Practices
 
